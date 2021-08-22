@@ -1,0 +1,18 @@
+(define (filter list predicate)
+  (if (null? list)
+    list
+    (if (predicate (car list))
+      (cons (car list) (filter (cdr list) predicate))
+      (filter (cdr list) predicate)
+    )
+  )
+)
+
+(define (same-parity a . b)
+  (let ((parity (remainder a 2)))
+    (define (parity-check x) 
+      (= (remainder x 2) parity)
+    )
+    (cons a (filter b parity-check))
+  )
+)
